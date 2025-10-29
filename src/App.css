@@ -1,38 +1,321 @@
-.App {
-  text-align: center;
+/* src/App.css - Modern styling for The Spot */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+/* ===== HEADER ===== */
+.app-container > h1 {
+  text-align: center;
+  color: white;
+  font-size: 42px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.app-container > p {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+/* ===== AUTH BUTTONS ===== */
+.auth-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.auth-buttons p {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.auth-buttons button {
+  background: white;
+  color: #667eea;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.auth-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.auth-buttons button:active {
+  transform: translateY(0);
+}
+
+/* ===== PLACE FORM ===== */
+.place-form {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.place-form input,
+.place-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.place-form input:focus,
+.place-form textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.place-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.place-form button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.place-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.place-form button:active {
+  transform: translateY(0);
+}
+
+/* ===== PLACES LIST ===== */
+.place-form + div h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.place-form + div > p {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+}
+
+/* ===== PLACES GRID ===== */
+.places-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ===== SPOT CARD ===== */
+.spot-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.spot-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.spot-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+}
+
+.spot-info {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.spot-info h2 {
+  color: #333;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.spot-info p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.spot-info p strong {
+  color: #333;
+  font-weight: 600;
+}
+
+.spot-info p em {
+  color: #999;
+  font-style: italic;
+  font-size: 13px;
+}
+
+.spot-info button {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 10px 16px;
+  background: #ff4757;
   color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.spot-info button:hover {
+  background: #ff3838;
+  transform: translateY(-2px);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .app-container > h1 {
+    font-size: 32px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .places-grid {
+    grid-template-columns: 1fr;
+    padding: 10px;
   }
+
+  .place-form {
+    padding: 20px;
+  }
+
+  .auth-buttons {
+    flex-direction: column;
+  }
+
+  .auth-buttons button {
+    width: 100%;
+  }
+}
+
+/* ===== LOADING STATE ===== */
+.place-form + div > p:first-of-type {
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 18px;
+}
+
+/* ===== SEARCH BAR ===== */
+.search-container {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  display: flex;
+  justify-content: center;
+}
+.search-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 14px 18px;
+  background: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: white;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+/* ===== RESULTS TEXT ===== */
+.results-count {
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 25px;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.loading-text,
+.no-results {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  padding: 40px 20px;
+}
+
+.no-results {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 600px;
 }
