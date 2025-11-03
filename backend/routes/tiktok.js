@@ -1,10 +1,9 @@
 const express = require('express');
-const axios = require('axios');
 const router = express.Router();
 const { db } = require('../firebase-config');
-const { collection, addDoc, query, where, getDocs } = require('firebase/firestore');
+const { collection, addDoc } = require('firebase/firestore');
 
-// ===== SEARCH TIKTOK FOR TRENDING SPOTS =====
+// ===== SEARCH TIKTOK FOR TRENDING SPOTS (MOCK DATA) =====
 router.get('/search', async (req, res) => {
   try {
     const { query: searchQuery } = req.query;
@@ -13,53 +12,63 @@ router.get('/search', async (req, res) => {
       return res.status(400).json({ error: 'Search query required' });
     }
 
-    const clientKey = process.env.TIKTOK_CLIENT_KEY;
-    const clientSecret = process.env.TIKTOK_CLIENT_SECRET;
+    console.log(`🔍 Searching for trending spots in: "${searchQuery}"`);
 
-    if (!clientKey || !clientSecret) {
-      return res.status(500).json({ error: 'TikTok credentials not configured' });
+    // Mock TikTok data
+    const mockSpots = [
+      {
+        Name: `Trendy Cafe in ${searchQuery}`,
+        Category: 'Cafe',
+        Location: searchQuery,
+        Description: 'Aesthetic vibes, great coffee, perfect for photos',
+        ImageUrl: 'https://via.placeholder.com/400x300?text=Trendy+Cafe',
+        Rating: '4.8',
+        source: 'tiktok',
+        createdAt: new Date(),
+        likes: 15000,
+      },
+      {
+        Name: `Hidden Gem Restaurant`,
+        Category: 'Restaurant',
+        Location: searchQuery,
+        Description: 'Must-visit spot with viral dishes',
+        ImageUrl: 'https://via.placeholder.com/400x300?text=Restaurant',
+        Rating: '4.9',
+        source: 'tiktok',
+        createdAt: new Date(),
+        likes: 25000,
+      },
+      {
+        Name: `Scenic Viewpoint`,
+        Category: 'Viewpoint',
+        Location: searchQuery,
+        Description: 'Instagram-worthy views that are trending',
+        ImageUrl: 'https://via.placeholder.com/400x300?text=Viewpoint',
+        Rating: '4.7',
+        source: 'tiktok',
+        createdAt: new Date(),
+        likes: 18000,
+      },
+    ];
+
+    // Save to Firestore
+    for (const spot of mockSpots) {
+      try {
+        await addDoc(collection(db, 'Places'), spot);
+        console.log(`✅ Saved: ${spot.Name}`);
+      } catch (error) {
+        console.error(`Error saving spot: ${spot.Name}`, error);
+      }
     }
 
-    console.log(`🔍 Searching TikTok for: "${searchQuery}"`);
-
-    // Call TikTok API
-    const tiktokResponse = await axios.get(
-      'https://open.tiktokapis.com/v1/video/query/',
-      {
-        headers: {
-          Authorization: `Bearer ${clientKey}`,
-          'Content-Type': 'application/json',
-        },
-        params: {
-          query: searchQuery,
-          max_count: 10,
-        },
-      }
-    );
-
-    const videos = tiktokResponse.data.data || [];
-    console.log(`✅ Found ${videos.length} TikTok videos`);
-
-    const spots = videos.map(video => ({
-      Name: video.title || searchQuery,
-      Category: 'TikTok Trend',
-      Location: searchQuery,
-      Description: video.desc || 'Trending on TikTok',
-      ImageUrl: video.dynamic_cover || '',
-      Rating: 'Popular',
-      source: 'tiktok',
-      createdAt: new Date(),
-      likes: video.like_count || 0,
-    }));
-
     res.json({
-      message: `Found ${spots.length} spots from TikTok`,
-      spots: spots,
+      message: `Found ${mockSpots.length} trending spots in ${searchQuery}`,
+      spots: mockSpots,
     });
   } catch (error) {
-    console.error('❌ TikTok API Error:', error.message);
+    console.error('❌ Error:', error.message);
     res.status(500).json({
-      error: 'Failed to search TikTok',
+      error: 'Failed to search spots',
       details: error.message,
     });
   }

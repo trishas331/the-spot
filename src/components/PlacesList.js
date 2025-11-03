@@ -55,10 +55,10 @@ function PlacesList({ user, refreshTrigger }) {
       alert('Enter a location to search!');
       return;
     }
-
+  
     try {
       console.log(`🔍 Searching TikTok for: ${query}`);
-      const response = await fetch(`/api/tiktok/search?query=${encodeURIComponent(query)}`);
+      const response = await fetch(`http://localhost:8000/api/tiktok/search?query=${encodeURIComponent(query)}`);
       const data = await response.json();
       
       if (response.ok) {
