@@ -1,6 +1,6 @@
-# Terms of Service - The Spot
+# Terms of Service
 
-**Last Updated:** October 2025
+**Last Updated:** November 2025
 
 ## 1. Overview
 The Spot is a web application that helps users discover and share local spots (cafes, restaurants, viewpoints, etc.) from social media trends.
@@ -14,12 +14,4 @@ Permission is granted to use The Spot for personal, non-commercial purposes only
 - We use TikTok API for content discovery
 
 ## 4. Disclaimer
-The Spot is provided "as-is". We are not responsible for:
-- Accuracy of spot information
-- Availability of locations
-- Third-party content
-
-## 5. Changes
-We reserve the right to modify these terms at any time.
-
-For questions, contact the developer.
+The Spot is provided "as-is". We are not responsible for accuracy of spot information or availability of locations.
